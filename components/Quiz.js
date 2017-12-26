@@ -18,13 +18,28 @@ function Card({ textDisplayed, linkToFlip, flipFunc }) {
 	)
 }
 
+function QuizResults({deckTitle, textDisplayed, nav}) {
+	return (
+    <View>
+      <Card
+        textDisplayed={textDisplayed}
+      />
+      <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate('Quiz',	{title: deckTitle	}	) }  } 
+          styleButton={styles.quizAgainButton} 
+          styleLabel={styles.submitButtonLabel} 
+          label={'Take quiz again'} />         
+
+    </View> 
+	)
+}
+
 class Quiz extends Component {
 	state = {
+    front: true,
 		currentQuestion: 0,
-		numberOfQuestions: 0,
-		correctAnswers: 0,
+    correctAnswers: 0,
 		incorrectAnswers: 0,
-		front: true
+    numberOfQuestions: 0
 	}
 
 	componentDidMount() {
@@ -53,72 +68,52 @@ class Quiz extends Component {
 		}
 	})
 
-	flipCard = (() => {
+	onFlipCard = (() => {
 		this.setState((prevState) => ({
 			front: !prevState.front
 		}))
 	})
 
-	displayCard = ((question, answer, flipCard) => {
-		const totalAnswers = this.state.correctAnswers + this.state.incorrectAnswers
-		const numberOfQuestions = this.state.numberOfQuestions
-
-		return (
-			<View>
-				 { (totalAnswers !== numberOfQuestions) && (
-          <View>  
-            <Card
-              textDisplayed={ this.state.front === true? question:answer}
-              linkToFlip={this.state.front === true? 'Answer':'Question'}
-              flipFunc={flipCard}
-            /> 
-            <View>
-              <GenericButton	onPress={() =>{this.onSubmitAnswer(true)}} styleButton={styles.correctButton} styleLabel={styles.submitButtonLabel} label={'Correct'} />
-              <GenericButton	onPress={() =>{this.onSubmitAnswer(false)}} styleButton={styles.incorrectButton} styleLabel={styles.submitButtonLabel} label={'Incorrect'} />
-            </View>
-          </View>
-        )} 
-
-        { (totalAnswers === numberOfQuestions) && (
-           <View>
-            <Card
-              textDisplayed={'You answered correctly to ' + (this.state.correctAnswers  * 100 / totalAnswers) + '% of the questions.'}
-            />
-            <GenericButton	onPress={() => this.props.navigation.navigate('DeckDetails',	{title: this.props.navigation.state.params.title	}	)} 
-                styleButton={styles.backDetailsButton} 
-                styleLabel={styles.backDetailsLabel} 
-                label={'Back to Details'} />
-  
-            <GenericButton	onPress={() => this.props.navigation.navigate('Quiz',	{title: this.props.navigation.state.params.title	}	)} 
-                styleButton={styles.quizAgainButton} 
-                styleLabel={styles.submitButtonLabel} 
-                label={'Take quiz again'} />              
-         </View> 
-        )}  
-
-			</View>
-
-		)
-})
-
 	render() {
-    const deckTitle = this.props.navigation.state.params.title
-    const questions = this.props.decks[deckTitle].questions
+    const questions = this.props.decks[this.props.navigation.state.params.title].questions
     const question = questions[this.state.currentQuestion].question
 		const answer = questions[this.state.currentQuestion].answer
-		const correctAnswers = this.state.correctAnswers
-		const incorrectAnswers = this.state.incorrectAnswers
-		const totalAnswers = correctAnswers + incorrectAnswers
-		const numberOfQuestions = this.state.numberOfQuestions
+    const totalAnswers = this.state.correctAnswers + this.state.incorrectAnswers
+    const numberOfQuestions = this.state.numberOfQuestions
 
 		return (
 			<View style={styles.container}>
-				<Text style={styles.counter}>
-					{
-						totalAnswers + ' / ' + numberOfQuestions
-					}
-				</Text>
-				{ this.displayCard(question, answer, this.flipCard) }
+          <Text style={styles.counter}>
+            {
+              `${totalAnswers}  /  ${this.state.numberOfQuestions}`
+            }
+          </Text>
+          
+          <View>
+          { (totalAnswers !== numberOfQuestions) && (
+
+            <View>  
+              <Card
+                textDisplayed={ this.state.front === true? question:answer}
+                linkToFlip={this.state.front === true? 'Answer':'Question'}
+                flipFunc={this.onFlipCard}
+              /> 
+              <View>
+                <GenericButton	onPress={() =>{this.onSubmitAnswer(true)}} styleButton={styles.correctButton} styleLabel={styles.submitButtonLabel} label={'Correct'} />
+                <GenericButton	onPress={() =>{this.onSubmitAnswer(false)}} styleButton={styles.incorrectButton} styleLabel={styles.submitButtonLabel} label={'Incorrect'} />
+              </View>
+            </View>
+          )} 
+
+          { (totalAnswers === numberOfQuestions) && (
+              <QuizResults
+                deckTitle={this.props.navigation.state.params.title}
+                textDisplayed={`You answered correctly to ${(this.state.correctAnswers  * 100 / totalAnswers)} % of the questions.`}
+                nav={this.props.navigation}
+            /> 
+          )}  
+        </View>  
+
 			</View>
 		)
 	}
@@ -129,6 +124,17 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'flex-start',
 		backgroundColor: white
+  },
+  quizAgainButton: {
+		backgroundColor: orange,
+		padding: 10,
+		height: 45,
+		marginLeft: 100,
+		marginRight: 100,
+		marginTop: 10,
+		borderRadius: 6,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	correctButton: {
 		backgroundColor: lightPurp,
@@ -174,17 +180,6 @@ const styles = StyleSheet.create({
 		color: orange,
 		fontSize: 22,
 		textAlign: 'center'
-	},
-	quizAgainButton: {
-		backgroundColor: orange,
-		padding: 10,
-		height: 45,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center'
 	},
 	mainText: {
 		color: darkGrey,
