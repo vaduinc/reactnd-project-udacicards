@@ -4,24 +4,25 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { white, orange, green, red, grey, darkGrey ,pink,lightPurp} from '../utils/colors'
 import GenericButton from './GenericButton'
+import { Card } from 'react-native-elements'
 
-function Card({ textDisplayed, linkToFlip, flipFunc }) {
+function QuestionAnswer({ textDisplayed, linkToFlip, flipFunc }) {
 	return (
-		<View style={styles.card}>
-			<Text style={styles.mainText}> 
-      	{textDisplayed}
-			</Text>
-			<Text onPress={() => flipFunc()} style={styles.secondaryText}	>
-				{linkToFlip}
-			</Text>
-		</View>
+    <Card containerStyle={styles.card}>
+      <Text style={styles.mainText}> 
+        {textDisplayed}
+      </Text>
+      <Text onPress={() => flipFunc()} style={styles.secondaryText}	>
+        {linkToFlip}
+      </Text>
+    </Card>
 	)
 }
 
 function QuizResults({deckTitle, textDisplayed, nav}) {
 	return (
     <View>
-      <Card
+      <QuestionAnswer
         textDisplayed={textDisplayed}
       />
       <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate('Quiz',	{title: deckTitle	}	) }  } 
@@ -93,7 +94,7 @@ class Quiz extends Component {
           { (totalAnswers !== numberOfQuestions) && (
 
             <View>  
-              <Card
+              <QuestionAnswer
                 textDisplayed={ this.state.front === true? question:answer}
                 linkToFlip={this.state.front === true? 'Answer':'Question'}
                 flipFunc={this.onFlipCard}
@@ -122,7 +123,7 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'flex-start',
+	//	justifyContent: 'flex-start',
 		backgroundColor: white
   },
   quizAgainButton: {
@@ -198,8 +199,10 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 	card: {
-		marginTop: 140,
-		marginBottom: 80
+    backgroundColor: orange,
+    padding: 20,
+    marginTop: 110,
+		marginBottom: 40
 	}
 })
 
