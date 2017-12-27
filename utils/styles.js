@@ -150,6 +150,7 @@ export default StyleSheet.create({
 
 ///////////// DECKS //////////////////
     ,items: {
-        textAlign: 'center'
+		textAlign: 'center',
+		fontSize: 32,
     }    
 })

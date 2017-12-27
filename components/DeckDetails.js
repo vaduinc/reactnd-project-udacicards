@@ -10,6 +10,7 @@ class DeckDetails extends Component {
 	render() {
 		const deckTitle = this.props.navigation.state.params.title
 		const questionsNumber = this.props.decks[deckTitle].questions.length
+		
 		return (
 			<View style={styles.container}>
         <Card containerStyle={styles.card} >

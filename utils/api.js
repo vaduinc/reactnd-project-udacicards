@@ -34,7 +34,6 @@ export const setupData = () => {
 
 export function getDecks(){
     return AsyncStorage.getItem(UDACICARDS_STORAGE_KEY)
-        //.then((results) => {console.log(results)} )
         .then((results) => {return results === null ? setupData() : JSON.parse(results)} )
         //.then((results) => {return setupData() } )
 }

@@ -1,41 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Text, View, FlatList } from 'react-native'
-import { List, ListItem, SearchBar } from 'react-native-elements'
+import { List, ListItem } from 'react-native-elements'
 import {fetchDecks} from '../actions/deckActions'
 import styles from '../utils/styles'
-
-
-function renderSeparator () {
-  return (
-    <View
-      style={{
-        height: 1,
-        backgroundColor: "#CED0CE",
-      }}
-    />
-  )
-}
+import * as COLORS from '../utils/colors'
 
 class Decks extends Component {   
+
+  colores = Object.keys(COLORS)
 
   componentDidMount() {
     this.props.fetchDecks()
   }
 
    goToDeckDetails = (item) =>{
-     console.log(item)
      this.props.navigation.navigate('DeckDetails',
         {
           title: item.title
         })
    }
 
-  renderItem =({item}) =>{
+  renderItem =(data) =>{
+    let { item, index } = data;
     return <ListItem titleStyle={styles.items} subtitleStyle={styles.items}
         title={item.title}
         subtitle={`${item.questions.length} cards`}
-        containerStyle={{ borderBottomWidth: 0 }}
+        containerStyle={{ borderBottomWidth: 0 , backgroundColor: COLORS[this.colores[(index % this.colores.length-1) + 1]] }}
         onPress={() => {this.goToDeckDetails(item)}}
       />
   }
@@ -47,14 +38,15 @@ class Decks extends Component {
     const deckCollection = Object.keys(decks).map((key) => { return decks[key] }) || []
 
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-        <FlatList 
-            data={deckCollection}
-            renderItem={this.renderItem}
-            keyExtractor={item => item.title}
-            ItemSeparatorComponent={renderSeparator}
-        />
-      </List>
+      <View style={styles.container}>
+        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+          <FlatList 
+              data={deckCollection}
+              renderItem={this.renderItem}
+              keyExtractor={item => item.title}
+          />
+        </List>
+      </View>
     )
   }
 }

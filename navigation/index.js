@@ -78,7 +78,7 @@ export default MainNavigator = StackNavigator({
       navigationOptions: {
         title: 'Quiz',
         headerStyle: {
-          backgroundColor: orange,
+          backgroundColor: purple,
         },
         headerTitleStyle: {
           color: white
