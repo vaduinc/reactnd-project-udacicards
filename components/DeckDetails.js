@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { white, pink, grey, lightPurp,orange } from '../utils/colors'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Card } from 'react-native-elements'
 import GenericButton from './GenericButton'
+import styles from '../utils/styles'
 
 class DeckDetails extends Component {
   
@@ -39,66 +39,6 @@ class DeckDetails extends Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: orange
-  },
-  card: {
-    backgroundColor: white,
-    padding: 20,
-		borderRadius: 10
-	},
-	addCardButton: {
-		backgroundColor: white,
-		padding: 10,
-		height: 45,
-		width: 120,
-		marginLeft: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		borderWidth: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	addCardLabel: {
-		color: pink,
-		fontSize: 16,
-		textAlign: 'center'
-	},
-	quizButton: {
-		backgroundColor: white,
-		padding: 10,
-		height: 45,
-		width: 200,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	quizButtonLabel: {
-		color: pink,
-		fontSize: 16,
-		textAlign: 'center'
-	},
-	deckTitle: {
-		color: lightPurp,
-		fontSize: 32,
-		textAlign: 'center'
-	},
-	cardsNumber: {
-		color: grey,
-		fontSize: 22,
-		textAlign: 'center'
-	},
-	textContainer: {
-		marginTop: 120,
-		marginBottom: 120
-	}
-})
 
 const mapStateToProps = ({ decks }) => ({
   decks

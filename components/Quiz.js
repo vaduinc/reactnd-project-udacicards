@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet  } from 'react-native'
+import { View, Text, TouchableOpacity  } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { white, orange, green, red, grey, darkGrey ,pink,lightPurp} from '../utils/colors'
 import GenericButton from './GenericButton'
 import { Card } from 'react-native-elements'
+import styles from '../utils/styles'
 
-function QuestionAnswer({ textDisplayed, linkToFlip, flipFunc }) {
+function QuestionAnswer({ textDisplayed, flipText, flipFunc }) {
 	return (
-    <Card containerStyle={styles.card}>
+    <Card containerStyle={[styles.frontCard,flipText==='Question'?styles.frontCard:styles.backCard]}>
       <Text style={styles.mainText}> 
         {textDisplayed}
       </Text>
       <Text onPress={() => flipFunc()} style={styles.secondaryText}	>
-        {linkToFlip}
+        {flipText}
       </Text>
     </Card>
 	)
@@ -24,6 +24,7 @@ function QuizResults({deckTitle, textDisplayed, nav}) {
     <View>
       <QuestionAnswer
         textDisplayed={textDisplayed}
+        flipFunc={()=>console.log('take quiz again')}
       />
       <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate('Quiz',	{title: deckTitle	}	) }  } 
           styleButton={styles.quizAgainButton} 
@@ -35,13 +36,17 @@ function QuizResults({deckTitle, textDisplayed, nav}) {
 }
 
 class Quiz extends Component {
-	state = {
-    front: true,
-		currentQuestion: 0,
-    correctAnswers: 0,
-		incorrectAnswers: 0,
-    numberOfQuestions: 0
-	}
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      front: true,
+      currentQuestion: 0,
+      correctAnswers: 0,
+      incorrectAnswers: 0,
+      numberOfQuestions: 0
+    }
+  }
 
 	componentDidMount() {
     const deckTitle = this.props.navigation.state.params.title
@@ -96,12 +101,12 @@ class Quiz extends Component {
             <View>  
               <QuestionAnswer
                 textDisplayed={ this.state.front === true? question:answer}
-                linkToFlip={this.state.front === true? 'Answer':'Question'}
+                flipText={this.state.front === true? 'Answer':'Question'}
                 flipFunc={this.onFlipCard}
               /> 
               <View>
-                <GenericButton	onPress={() =>{this.onSubmitAnswer(true)}} styleButton={styles.correctButton} styleLabel={styles.submitButtonLabel} label={'Correct'} />
-                <GenericButton	onPress={() =>{this.onSubmitAnswer(false)}} styleButton={styles.incorrectButton} styleLabel={styles.submitButtonLabel} label={'Incorrect'} />
+                <GenericButton	onPress={() =>{this.onSubmitAnswer(true)}} styleButton={[styles.quizAgainButton,styles.correctButton]} styleLabel={styles.submitButtonLabel} label={'Correct'} />
+                <GenericButton	onPress={() =>{this.onSubmitAnswer(false)}} styleButton={[styles.quizAgainButton,styles.incorrectButton]} styleLabel={styles.submitButtonLabel} label={'Incorrect'} />
               </View>
             </View>
           )} 
@@ -119,93 +124,6 @@ class Quiz extends Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	//	justifyContent: 'flex-start',
-		backgroundColor: white
-  },
-  quizAgainButton: {
-		backgroundColor: orange,
-		padding: 10,
-		height: 45,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	correctButton: {
-		backgroundColor: lightPurp,
-		padding: 10,
-		height: 45,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	incorrectButton: {
-		backgroundColor: red,
-		padding: 10,
-		height: 45,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	submitButtonLabel: {
-		color: pink,
-		fontSize: 22,
-		textAlign: 'center'
-	},
-	backDetailsButton: {
-		backgroundColor: pink,
-		padding: 10,
-		height: 45,
-		marginLeft: 100,
-		marginRight: 100,
-		marginTop: 10,
-		borderRadius: 6,
-		borderWidth: 1,
-		borderColor: grey,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	backDetailsLabel: {
-		color: orange,
-		fontSize: 22,
-		textAlign: 'center'
-	},
-	mainText: {
-		color: darkGrey,
-		fontSize: 34,
-		textAlign: 'center'
-	},
-	secondaryText: {
-		color: red,
-		fontSize: 14,
-		textAlign: 'center'
-	},
-	counter: {
-		color: darkGrey,
-		marginLeft: 10,
-		marginTop: 10,
-		fontSize: 16,
-	},
-	card: {
-    backgroundColor: orange,
-    padding: 20,
-    marginTop: 110,
-		marginBottom: 40
-	}
-})
-
 
 const mapStateToProps = ({ decks }) => ({
   decks

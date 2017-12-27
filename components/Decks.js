@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList } from 'react-native'
 import { List, ListItem, SearchBar } from 'react-native-elements'
 import {fetchDecks} from '../actions/deckActions'
+import styles from '../utils/styles'
 
 
 function renderSeparator () {
@@ -63,9 +64,3 @@ const mapStateToProps = ({ decks }) => ({
 })
 
 export default connect(mapStateToProps,{fetchDecks})(Decks)
-
-const styles = StyleSheet.create({
-  items: {
-    textAlign: 'center'
-  },
-})
