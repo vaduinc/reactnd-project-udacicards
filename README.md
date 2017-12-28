@@ -77,6 +77,13 @@ quiz again.
 
 ![results](screenshots/ss7.png "results")
 
+## Notifications
+The application will pop up a notification at 7:30 PM everyday if the user hasn't taken
+a full quiz during that day, saying 
+<br><br>
+"Humm you need to study!"
+"don't forget practice today!"
+
 ## NOTES:
 
 This application was tested in a IPHONE emulator and a HTC Android device.
