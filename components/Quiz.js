@@ -30,7 +30,7 @@ function QuizResults({deckTitle, textDisplayed, nav}) {
     <View>
       <QuestionAnswer
         textDisplayed={textDisplayed}
-        flipFunc={()=>console.log('take quiz again')}
+        flipFunc={function(){}}
       />
       <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate(QUIZ,	{title: deckTitle	}	) }  } 
           styleButton={styles.quizAgainButton} 

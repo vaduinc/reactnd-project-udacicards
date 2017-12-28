@@ -3,13 +3,11 @@ import * as TYPES from '../actions/actionTypes'
 export function decks(state = {}, action) {
 	switch(action.type) {
 		case TYPES.RECEIVE_DECKS: 
-			console.log(JSON.stringify(action.decks))
 			return {
 				...state,
 				...action.decks
 			}
 		case TYPES.ADD_DECK:
-			console.log(JSON.stringify(action.deck))
 			return {
 				...state,
 				...action.deck
