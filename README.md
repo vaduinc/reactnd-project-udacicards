@@ -27,6 +27,7 @@ Then you can select "a" for Android or "i" for IPhone
 
 You will then see the application running in your device or emulator (depending whether you have your device connected to your computer)
 Navigate the application using the following descriptions from the main page, see next picture.
+<br>
 Home page lists all the existing decks created by the user (first time will have 2 by default).
 User can select any existing deck just by clicking/touching the item in the list.
 
@@ -35,7 +36,7 @@ User can select any existing deck just by clicking/touching the item in the list
 ```diff
 ```
 ## New Deck
-At the bottom of the main page, the user will have the option to create new decks (New Deck)
+At the bottom of the main page, the user will have the option to create new decks (Add Deck)
 
 ![New Decks](screenshots/ss2.png "new decks")
 
@@ -49,15 +50,32 @@ Just type the question/answer and the submit button will display.
 
 ```diff
 ```
-## Add / Edit post
+## Take Quiz 
+While in the Deck Details, the user can add or start a quiz if there 
+are any cards.
 
-![add/edit post](screenshots/ss4.png "add / edit post")
+![Take Quiz](screenshots/ss4.png "take quiz")
 
 ```diff
 ```
-## Edit comment
 
-![edit comment](screenshots/ss5.png "edit comment")
+## Question
+Each question is presented with a link/button to the "answer"
+that the user can click/touch to see the back of the card (answer)
+
+![question](screenshots/ss5.png "question")
+
+## Answer
+Each answer has a link/button to get back to the "question"
+
+![answer](screenshots/ss6.png "answer")
+
+## Results
+At the end of the quiz, there is a result page showing the %
+of correct answers. Also there is "take quiz again" button to start the
+quiz again.
+
+![results](screenshots/ss7.png "results")
 
 ## NOTES:
 
