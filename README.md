@@ -25,22 +25,27 @@ Then you can select "a" for Android or "i" for IPhone
 
 ![select device](screenshots/ss8.png "select device")
 
-You browser should open automatically using http://localhost:3000 URL.
-Navigate the application using the following descriptions from the home page, see next picture
+You will then see the application running in your device or emulator (depending whether you have your device connected to your computer)
+Navigate the application using the following descriptions from the main page, see next picture.
+Home page lists all the existing decks created by the user (first time will have 2 by default).
+User can select any existing deck just by clicking/touching the item in the list.
 
 ![Home](screenshots/ss1.png "home")
 
 ```diff
 ```
-## Category filter
+## New Deck
+At the bottom of the main page, the user will have the option to create new decks (New Deck)
 
-![category filter](screenshots/ss2.png "category filter")
+![New Decks](screenshots/ss2.png "new decks")
 
 ```diff
 ```
-## Post details page
+## Add cards/question to a Deck
+User can add as many cards hi/she wants to any given deck.
+Just type the question/answer and the submit button will display.
 
-![post details](screenshots/ss3.png "post details")
+![New Cards](screenshots/ss3.png "new cards")
 
 ```diff
 ```
