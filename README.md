@@ -10,14 +10,20 @@ Mobile application (Android or iOS - or both) that allows users to study collect
 ## How to...
 The project uses Node.js and the "Project Readable API Server" project as server using 3001 port.  You MUST have NODEJS installed already in your computer
 
-Go to the directory where you want to store the app
+Go to the directory where you want to store the app (Terminal)
 ```
 git clone https://github.com/vaduinc/reactnd-project-udacicards.git
 ```
 Go to the applicaton folder and run the commands
 ```
-nmp install
+npm install
+npm start
+
+You will see some options (similar to the following screenshot)
+Then you can select "a" for Android or "i" for IPhone
 ```
+
+![select device](screenshots/ss8.png "select device")
 
 You browser should open automatically using http://localhost:3000 URL.
 Navigate the application using the following descriptions from the home page, see next picture
@@ -47,6 +53,10 @@ Navigate the application using the following descriptions from the home page, se
 ## Edit comment
 
 ![edit comment](screenshots/ss5.png "edit comment")
+
+## NOTES:
+
+This application was tested in a IPHONE emulator and a HTC Android device.
 
 ### Resources:
 * [Project UdaciFitness API Server](https://github.com/udacity/reactnd-UdaciFitness-complete)
