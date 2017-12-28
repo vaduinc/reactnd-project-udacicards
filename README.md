@@ -1,4 +1,4 @@
-# Readable
+# UdaciCard - React Native
 ---
 
 ## Project:
