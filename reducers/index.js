@@ -3,4 +3,4 @@ import {decks} from './deckReducers'
 
 export default combineReducers({
     decks
-  });
+  })

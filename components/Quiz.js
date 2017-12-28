@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation'
 import GenericButton from './GenericButton'
 import { Card } from 'react-native-elements'
 import styles from '../utils/styles'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 function QuestionAnswer({ textDisplayed, flipText, flipFunc }) {
 	return (
@@ -20,6 +21,10 @@ function QuestionAnswer({ textDisplayed, flipText, flipFunc }) {
 }
 
 function QuizResults({deckTitle, textDisplayed, nav}) {
+
+  clearLocalNotification()
+       .then(setLocalNotification)
+       
 	return (
     <View>
       <QuestionAnswer

@@ -7,6 +7,8 @@ import { Constants } from 'expo'
 import thunk from 'redux-thunk'
 import MainNavigator from './navigation'
 import { purple } from './utils/colors'
+import { setLocalNotification } from './utils/notifications'
+
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -27,6 +29,11 @@ function UdaciStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={store}>

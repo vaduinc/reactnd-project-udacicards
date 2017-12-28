@@ -7,13 +7,13 @@ export function decks(state = {}, action) {
 			return {
 				...state,
 				...action.decks
-			};
+			}
 		case TYPES.ADD_DECK:
 			console.log(JSON.stringify(action.deck))
 			return {
 				...state,
 				...action.deck
-			};
+			}
 		case TYPES.ADD_CARD:
 			const deckTitle = action.title
 			const card = action.card

@@ -22,7 +22,7 @@ class Decks extends Component {
    }
 
   renderItem =(data) =>{
-    let { item, index } = data;
+    let { item, index } = data
     return <ListItem titleStyle={styles.items} subtitleStyle={styles.items}
         title={item.title}
         subtitle={`${item.questions.length} cards`}
