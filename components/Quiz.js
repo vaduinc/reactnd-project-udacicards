@@ -6,6 +6,7 @@ import GenericButton from './GenericButton'
 import { Card } from 'react-native-elements'
 import styles from '../utils/styles'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import {QUIZ} from '../navigation'
 
 function QuestionAnswer({ textDisplayed, flipText, flipFunc }) {
 	return (
@@ -31,7 +32,7 @@ function QuizResults({deckTitle, textDisplayed, nav}) {
         textDisplayed={textDisplayed}
         flipFunc={()=>console.log('take quiz again')}
       />
-      <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate('Quiz',	{title: deckTitle	}	) }  } 
+      <GenericButton	onPress={() => { nav.goBack(null) ; nav.navigate(QUIZ,	{title: deckTitle	}	) }  } 
           styleButton={styles.quizAgainButton} 
           styleLabel={styles.submitButtonLabel} 
           label={'Take quiz again'} />         

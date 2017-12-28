@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Card } from 'react-native-elements'
 import GenericButton from './GenericButton'
 import styles from '../utils/styles'
+import {CARD_ENTRY, QUIZ} from '../navigation'
 
 class DeckDetails extends Component {
   
@@ -23,7 +24,7 @@ class DeckDetails extends Component {
             </Text>
           </View>
           <View>
-					<GenericButton	onPress={() => this.props.navigation.navigate('CardEntry', { title: deckTitle	})} 
+					<GenericButton	onPress={() => this.props.navigation.navigate(CARD_ENTRY, { title: deckTitle	})} 
 							styleButton={styles.addCardButton} 
 							styleLabel={styles.addCardLabel} 
 							label={'Add Card'} />
@@ -31,7 +32,7 @@ class DeckDetails extends Component {
         </Card>
           { questionsNumber>0 && (
 
-							<GenericButton	onPress={() => this.props.navigation.navigate('Quiz', { title: deckTitle })} 
+							<GenericButton	onPress={() => this.props.navigation.navigate(QUIZ, { title: deckTitle })} 
 									styleButton={styles.quizButton} 
 									styleLabel={styles.quizButtonLabel} 
 									label={'Start Quiz'} />

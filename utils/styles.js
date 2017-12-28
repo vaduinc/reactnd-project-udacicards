@@ -127,7 +127,7 @@ export default StyleSheet.create({
 		textAlign: 'center'
 	},
 	textContainer: {
-		marginTop: 120,
+		marginTop: 80,
 		marginBottom: 120
     }
 /////////////// DECK ENTRY //////////

@@ -6,6 +6,7 @@ import { saveDeck} from '../actions/deckActions'
 import { NavigationActions } from 'react-navigation'
 import GenericButton from './GenericButton'
 import styles from '../utils/styles'
+import {DECK_DETAILS} from '../navigation'
 
 class DeckEntry extends Component {
 
@@ -17,14 +18,13 @@ class DeckEntry extends Component {
   }
 
 	onSubmit = (() => {
-    //console.log(this.state.title)
     this.props.saveDeck(this.state.title)
       .then(()=> this.goToDeckDetails(this.state.title) )
 	})
 
 	goToDeckDetails = (title) => {
 		this.props.navigation.navigate(
-			'DeckDetails',{	title: title	}
+			DECK_DETAILS,{	title: title	}
 		)
 	}
 

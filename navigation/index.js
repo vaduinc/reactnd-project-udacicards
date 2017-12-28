@@ -10,6 +10,11 @@ import DeckEntry from '../components/DeckEntry'
 import { View, Platform, StatusBar ,Button} from 'react-native'
 import { purple, white, orange } from '../utils/colors'
 
+export const HOME='Home'
+export const DECK_DETAILS='DeckDetails'
+export const CARD_ENTRY='CardEntry'
+export const QUIZ='Quiz' 
+
 const Tabs = TabNavigator({
     Decks: {
       screen: Decks,
@@ -48,10 +53,10 @@ const Tabs = TabNavigator({
   
 
 export default MainNavigator = StackNavigator({
-    Home: {
+    [HOME]: {
       screen: Tabs,
     },
-    DeckDetails: {
+    [DECK_DETAILS]: {
       screen: DeckDetails,
       navigationOptions: ({navigation}) => ({
         headerLeft: <Icon onPress={() => navigation.navigate('Home')} type='fontawesome' color='white' size={34} name='chevron-left'  />,
@@ -62,7 +67,7 @@ export default MainNavigator = StackNavigator({
         }
       })
     },
-    CardEntry: {
+    [CARD_ENTRY]: {
       screen: CardEntry,
       navigationOptions: ({navigation}) => ({
         title: `${navigation.state.params.title}`,
@@ -75,7 +80,7 @@ export default MainNavigator = StackNavigator({
         headerTintColor: white
       })
     },
-    Quiz: {
+    [QUIZ]: {
       screen: Quiz,
       navigationOptions: ({navigation}) => ({
         title: `Quiz ${navigation.state.params.title}`,
